@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { askAI } from './ai'
 
@@ -8,9 +8,14 @@ const starterMessages = [
 
 const historyItems = ['New chat', 'Website ideas', 'Study helper', 'Product strategy']
 
+const getIsLandingPage = () => {
+  if (typeof window === 'undefined') return true
+  return window.location.pathname === '/' || window.location.pathname === ''
+}
+
 function App() {
   const textAreaRef = useRef(null)
-  const [showHome, setShowHome] = useState(true)
+  const [showHome, setShowHome] = useState(getIsLandingPage)
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -37,8 +42,26 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setShowHome(getIsLandingPage())
+    }
+
+    window.addEventListener('popstate', handleRouteChange)
+    handleRouteChange()
+
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange)
+    }
+  }, [])
+
   const startNewChat = () => {
     setShowHome(false)
+
+    if (window.location.pathname !== '/chat') {
+      window.history.pushState({ page: 'chat' }, '', '/chat')
+    }
+
     setMessages([
       {
         id: 1,
@@ -62,6 +85,10 @@ function App() {
     ])
     setInput('')
     autoResizeTextArea('')
+
+    if (window.location.pathname !== '/chat') {
+      window.history.pushState({ page: 'chat' }, '', '/chat')
+    }
   }
 
   const sendMessage = async (messageText) => {
@@ -117,7 +144,10 @@ function App() {
                   <button type="button" className="primary-cta" onClick={startNewChat}>
                     Start free for 14 days
                   </button>
-                  <button type="button" className="secondary-cta" onClick={() => setIsDarkMode(!isDarkMode)}>
+                  <button type="button" className="secondary-cta" onClick={() => {
+                    window.history.pushState({ page: 'chat' }, '', '/chat')
+                    setShowHome(false)
+                  }}>
                     Watch a 2-minute demo
                   </button>
                 </div>
@@ -220,6 +250,17 @@ function App() {
                 <small>Free plan</small>
               </div>
             </div>
+
+            <button
+              type="button"
+              className="history-item back-home-btn"
+              onClick={() => {
+                window.history.pushState({ page: 'home' }, '', '/')
+                setShowHome(true)
+              }}
+            >
+              ← Back to landing page
+            </button>
           </aside>
 
           <main className="main-panel">
