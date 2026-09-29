@@ -14,10 +14,10 @@ describe('askAI', () => {
     vi.restoreAllMocks()
   })
 
-  it('uses the Vite proxy route for Ollama requests', async () => {
+  it('uses the local /api/chat proxy route and Ollama chat payload', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
-      json: async () => ({ response: 'Proxy response' }),
+      json: async () => ({ message: { content: 'Proxy response' } }),
     })
 
     vi.stubGlobal('fetch', fetchMock)
@@ -27,6 +27,10 @@ describe('askAI', () => {
     expect(fetchMock).toHaveBeenCalledWith('/api/chat', expect.objectContaining({
       method: 'POST',
     }))
+
+    const requestBody = JSON.parse(fetchMock.mock.calls[0][1].body)
+    expect(requestBody.model).toBe('gemma4:31b')
+    expect(requestBody.messages[0].content).toBe('Hello there')
     expect(result).toBe('Proxy response')
   })
 })

@@ -14,7 +14,6 @@ export function formatPlainText(rawText = '') {
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
-
 export async function askAI(question) {
   const trimmedQuestion = question.trim();
 
@@ -29,7 +28,14 @@ export async function askAI(question) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        message: trimmedQuestion,
+        model: 'gemma4:31b',
+        messages: [
+          {
+            role: 'user',
+            content: trimmedQuestion,
+          },
+        ],
+        stream: false,
       }),
     });
 
@@ -38,7 +44,7 @@ export async function askAI(question) {
     }
 
     const data = await response.json();
-    const text = data?.response?.trim();
+    const text = data?.message?.content?.trim() || data?.response?.trim();
 
     if (text) {
       return formatPlainText(text);
