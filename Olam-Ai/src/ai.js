@@ -1,3 +1,20 @@
+export function formatPlainText(rawText = '') {
+  if (!rawText) return '';
+
+  return rawText
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\[(.+?)\]\(.+?\)/g, '$1')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/__(.*?)__/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/_(.*?)_/g, '$1')
+    .replace(/#{1,6}\s*/g, '')
+    .replace(/^-\s+/gm, '• ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 export async function askAI(question) {
   const trimmedQuestion = question.trim();
 
@@ -24,12 +41,12 @@ export async function askAI(question) {
     const text = data?.response?.trim();
 
     if (text) {
-      return text;
+      return formatPlainText(text);
     }
 
     return 'Unable to generate a response. Please try again.';
   } catch (error) {
     console.error('API request failed:', error);
-    return `Error: ${error.message || 'Failed to get response from AI'}`;
+    return formatPlainText(`Error: ${error.message || 'Failed to get response from AI'}`);
   }
 }

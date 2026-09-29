@@ -1,16 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { generateAnswer } from './ai'
+import { formatPlainText } from './ai'
 
-describe('generateAnswer', () => {
-  it('answers greeting questions', () => {
-    expect(generateAnswer('hello')).toContain('Hello')
-  })
+describe('formatPlainText', () => {
+  it('removes markdown formatting and keeps readable plain text', () => {
+    const result = formatPlainText('# Title\n\n**Hello**\n- item one\n- item two\n\n[link](https://example.com)')
 
-  it('explains React clearly', () => {
-    expect(generateAnswer('what is react')).toContain('JavaScript library')
-  })
-
-  it('returns a fallback for unknown questions', () => {
-    expect(generateAnswer('How do I build a business?')).toContain('best next step')
+    expect(result).toBe('Title\n\nHello\n• item one\n• item two\n\nlink')
   })
 })
