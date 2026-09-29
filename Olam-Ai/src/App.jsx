@@ -122,97 +122,100 @@ function App() {
     <div className={`chatgpt-shell ${isDarkMode ? 'dark' : 'light'}`}>
       {showHome ? (
         <div className="landing-page">
-          <div className="landing-shell">
-            <div className="landing-badge">New: weekly plans written for you</div>
+          <header className="landing-topbar">
+            <div className="brand-row-inline">
+              <span className="brand-square">◫</span>
+              <span className="brand-name">Olam Chat</span>
+              <span className="brand-sub">landing page</span>
+            </div>
 
-            <div className="landing-grid">
-              <div className="landing-copy">
+            <div className="topbar-actions">
+              <button type="button" className="ghost-icon" aria-label="Chat options">✦</button>
+              <button type="button" className="ghost-icon" aria-label="Open chat">◧</button>
+              <button type="button" className="ghost-icon" aria-label="More options">⋯</button>
+              <button type="button" className="top-cta" onClick={startNewChat}>Start chatting</button>
+            </div>
+          </header>
+
+          <div className="landing-shell">
+            <section className="hero-row">
+              <div className="hero-copy">
                 <h1>
-                  Know what's on<br />
-                  track, and what<br />
-                  isn't, before<br />
-                  Monday's<br />
-                  meeting.
+                  Ask anything.
+                  <br />
+                  Any hour. It
+                  <br />
+                  answers.
                 </h1>
 
                 <p>
-                  Diam AI reads your projects, flags work that is slipping, and drafts the next step.
-                  Your team spends less time updating status and more time shipping.
+                  Olam Chat is an AI assistant that never clocks out. Questions at midnight or midday get the same,
+                  clear, patient answer.
                 </p>
 
                 <div className="landing-actions">
                   <button type="button" className="primary-cta" onClick={startNewChat}>
-                    Start free for 14 days
+                    Start chatting
                   </button>
                   <button type="button" className="secondary-cta" onClick={() => {
                     window.history.pushState({ page: 'chat' }, '', '/chat')
                     setShowHome(false)
                   }}>
-                    Watch a 2-minute demo
+                    See what it does
                   </button>
                 </div>
-
-                <div className="metrics-row">
-                  <div className="metric-item">
-                    <strong>3 hrs</strong>
-                    <span>saved per person, per week</span>
-                  </div>
-                  <div className="metric-item">
-                    <strong>No setup</strong>
-                    <span>connects to your tools in minutes</span>
-                  </div>
-                  <div className="metric-item">
-                    <strong>Private</strong>
-                    <span>your data is never used to train models</span>
-                  </div>
-                </div>
               </div>
 
-              <div className="landing-visual" aria-hidden="true">
-                <div className="prompt-card">
-                  <div className="assistant-row">
-                    <span className="assistant-dot" />
-                    <span>Ask Diam</span>
+              <div className="hero-demo" aria-hidden="true">
+                <div className="demo-card">
+                  <div className="demo-header">
+                    <span>Olam Chat</span>
+                    <span>2:14 AM</span>
                   </div>
 
-                  <div className="prompt-bubble">What could delay the March launch?</div>
-
-                  <div className="risk-list">
-                    <div className="risk-item">
-                      <div className="risk-copy">
-                        <strong>Payment API review</strong>
-                        <small>Waiting on security sign-off for 4 days</small>
-                      </div>
-                      <span className="status blocked">Blocked</span>
-                    </div>
-
-                    <div className="risk-item">
-                      <div className="risk-copy">
-                        <strong>Onboarding copy</strong>
-                        <small>Writer is out Thursday and Friday</small>
-                      </div>
-                      <span className="status risk">At risk</span>
-                    </div>
-
-                    <div className="risk-item">
-                      <div className="risk-copy">
-                        <strong>Mobile release build</strong>
-                        <small>Passed all checks this morning</small>
-                      </div>
-                      <span className="status done">Done</span>
-                    </div>
+                  <div className="demo-chat user">How do I explain a gap in my CV?</div>
+                  <div className="demo-chat bot">
+                    Be brief and honest: name the gap in one line, then show what you did or learned. Then move
+                    straight to your recent strengths.
                   </div>
-
-                  <div className="prompt-actions">
-                    <button type="button">Nudge security team</button>
-                    <button type="button">Reassign copy</button>
-                  </div>
-
-                  <div className="tail-prompt">Ask about any project, person or deadline</div>
+                  <div className="demo-prompt">Where should we begin?</div>
                 </div>
               </div>
-            </div>
+            </section>
+
+            <section className="feature-section">
+              <h2>Built to be there when you need it</h2>
+
+              <div className="feature-grid">
+                <article className="feature-item">
+                  <h3>Always on</h3>
+                  <p>No queues, no office hours. Ask at 3 a.m. or during lunch and get an answer in seconds.</p>
+                </article>
+
+                <article className="feature-item">
+                  <h3>Plain answers</h3>
+                  <p>Olam explains things in clear language, then goes deeper only when you ask it to.</p>
+                </article>
+
+                <article className="feature-item">
+                  <h3>Pick up where you left off</h3>
+                  <p>Your conversations stay in the sidebar, so you can return to any question later.</p>
+                </article>
+              </div>
+            </section>
+
+            <section className="final-cta-block">
+              <h2>Your next question is waiting</h2>
+              <button type="button" className="primary-cta large" onClick={startNewChat}>
+                Open Olam Chat
+              </button>
+            </section>
           </div>
+
+          <footer className="landing-footer">
+            <span>Olam Chat</span>
+            <span>Answers may contain mistakes. Check anything important.</span>
+          </footer>
         </div>
       ) : (
         <>
