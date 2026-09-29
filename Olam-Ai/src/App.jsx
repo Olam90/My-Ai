@@ -95,80 +95,90 @@ function App() {
     <div className={`chatgpt-shell ${isDarkMode ? 'dark' : 'light'}`}>
       {showHome ? (
         <div className="landing-page">
-          <div className="floating-orb orb-one" />
-          <div className="floating-orb orb-two" />
-          <div className="floating-orb orb-three" />
-
-          <div className="landing-card">
-            <div className="landing-topbar">
-              <div className="landing-badge">AI companion</div>
-              <button type="button" className="theme-mini" onClick={() => setIsDarkMode(!isDarkMode)}>
-                {isDarkMode ? 'Light' : 'Dark'}
-              </button>
-            </div>
-
-            <div className="landing-brand">
-              <div className="brand-mark">O</div>
-              <span>Olam AI</span>
-            </div>
+          <div className="landing-shell">
+            <div className="landing-badge">New: weekly plans written for you</div>
 
             <div className="landing-grid">
               <div className="landing-copy">
-                <h1>Build smarter, move faster, think clearer.</h1>
+                <h1>
+                  Know what's on<br />
+                  track, and what<br />
+                  isn't, before<br />
+                  Monday's<br />
+                  meeting.
+                </h1>
+
                 <p>
-                  Olam AI helps with product strategy, website ideas, coding, study support, and business decisions — all in one focused workspace.
+                  Diam AI reads your projects, flags work that is slipping, and drafts the next step.
+                  Your team spends less time updating status and more time shipping.
                 </p>
 
                 <div className="landing-actions">
                   <button type="button" className="primary-cta" onClick={startNewChat}>
-                    Start chat
+                    Start free for 14 days
                   </button>
                   <button type="button" className="secondary-cta" onClick={() => setIsDarkMode(!isDarkMode)}>
-                    {isDarkMode ? 'Switch to light' : 'Switch to dark'}
+                    Watch a 2-minute demo
                   </button>
                 </div>
 
-                <div className="landing-features">
-                  <span>Website ideas</span>
-                  <span>Study help</span>
-                  <span>Business strategy</span>
-                  <span>AI coding</span>
+                <div className="metrics-row">
+                  <div className="metric-item">
+                    <strong>3 hrs</strong>
+                    <span>saved per person, per week</span>
+                  </div>
+                  <div className="metric-item">
+                    <strong>No setup</strong>
+                    <span>connects to your tools in minutes</span>
+                  </div>
+                  <div className="metric-item">
+                    <strong>Private</strong>
+                    <span>your data is never used to train models</span>
+                  </div>
                 </div>
               </div>
 
               <div className="landing-visual" aria-hidden="true">
-                <div className="visual-panel main-panel-card">
-                  <div className="visual-header">
-                    <span className="dot green" />
-                    <span className="dot yellow" />
-                    <span className="dot red" />
+                <div className="prompt-card">
+                  <div className="assistant-row">
+                    <span className="assistant-dot" />
+                    <span>Ask Diam</span>
                   </div>
-                  <div className="visual-content">
-                    <div className="mini-card accent">
-                      <small>Performance</small>
-                      <strong>94%</strong>
-                    </div>
-                    <div className="mini-card">
-                      <small>Ideas</small>
-                      <strong>24</strong>
-                    </div>
-                    <div className="signal-bars">
-                      <span style={{ height: '35%' }} />
-                      <span style={{ height: '55%' }} />
-                      <span style={{ height: '75%' }} />
-                      <span style={{ height: '100%' }} />
-                      <span style={{ height: '88%' }} />
-                    </div>
-                  </div>
-                </div>
 
-                <div className="floating-note note-one">
-                  <span>AI workflow</span>
-                  <strong>Optimized</strong>
-                </div>
-                <div className="floating-note note-two">
-                  <span>Next step</span>
-                  <strong>Launch plan</strong>
+                  <div className="prompt-bubble">What could delay the March launch?</div>
+
+                  <div className="risk-list">
+                    <div className="risk-item">
+                      <div className="risk-copy">
+                        <strong>Payment API review</strong>
+                        <small>Waiting on security sign-off for 4 days</small>
+                      </div>
+                      <span className="status blocked">Blocked</span>
+                    </div>
+
+                    <div className="risk-item">
+                      <div className="risk-copy">
+                        <strong>Onboarding copy</strong>
+                        <small>Writer is out Thursday and Friday</small>
+                      </div>
+                      <span className="status risk">At risk</span>
+                    </div>
+
+                    <div className="risk-item">
+                      <div className="risk-copy">
+                        <strong>Mobile release build</strong>
+                        <small>Passed all checks this morning</small>
+                      </div>
+                      <span className="status done">Done</span>
+                    </div>
+                  </div>
+
+                  <div className="prompt-actions">
+                    <button type="button">Nudge security team</button>
+                    <button type="button">Reassign copy</button>
+                  </div>
+
+                  <div className="tail-prompt">Ask about any project, person or deadline</div>
                 </div>
               </div>
             </div>
